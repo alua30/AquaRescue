@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Dark Marine -->
+    <color name="marine_background">#FF070D1A</color>
+    <color name="marine_icon_background">#FF0B1830</color>
+    <color name="marine_primary">#FF2F7BFF</color>
+    <color name="marine_danger">#FFFF4D4F</color>
 </resources>

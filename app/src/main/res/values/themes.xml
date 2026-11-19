@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.MyApplication" parent="android:Theme.Material.Light.NoActionBar" />
+    <!--
+        Тема окна на базе AppCompat (нужна AppCompatActivity для смены языка без перезапуска).
+        Тёмный фон, чтобы при запуске не было белой вспышки до отрисовки Compose.
+    -->
+    <style name="Theme.AquaRescue" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@color/marine_background</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
 </resources>

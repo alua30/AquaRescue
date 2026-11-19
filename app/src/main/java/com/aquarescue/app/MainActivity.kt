@@ -1,47 +1,37 @@
 package com.aquarescue.app
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.aquarescue.app.ui.theme.MyApplicationTheme
+import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.graphics.toArgb
+import com.aquarescue.app.navigation.AquaRescueNavApp
+import com.aquarescue.app.presentation.AppLanguage
+import com.aquarescue.app.ui.theme.AquaRescueTheme
+import com.aquarescue.app.ui.theme.MarineBackground
 
-class MainActivity : ComponentActivity() {
+/**
+ * AppCompatActivity нужна для per-app language API: при смене языка AppCompat
+ * пересоздаёт Activity с новой конфигурацией, без перезапуска приложения.
+ */
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        // Русский — язык по умолчанию: если пользователь ещё не выбирал язык,
+        // фиксируем его явно (иначе Android подставил бы язык системы).
+        if (!AppLanguage.isSelected()) {
+            AppLanguage.apply(AppLanguage.DEFAULT)
+        }
+        // Тёмная тема всегда: светлые значки системных панелей на тёмном фоне.
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.dark(MarineBackground.toArgb()),
+            navigationBarStyle = SystemBarStyle.dark(MarineBackground.toArgb()),
+        )
         setContent {
-            MyApplicationTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+            AquaRescueTheme {
+                AquaRescueNavApp()
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MyApplicationTheme {
-        Greeting("Android")
     }
 }

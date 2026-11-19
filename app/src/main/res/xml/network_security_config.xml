@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ESP32 отдаёт данные по обычному HTTP в локальной сети (TLS на микроконтроллере
+    избыточен для этой задачи). IP-адрес задаётся пользователем, поэтому открытый
+    HTTP разрешён. Приложение не обращается к внешним серверам.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>
